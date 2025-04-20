@@ -1,7 +1,6 @@
 import mongoose, { HydratedDocument, Schema } from "mongoose";
 import bcrypt from "bcryptjs";
-
-import AutoIncrement, { IAutoIncrement } from "./AutoIncrement"; // Adjust the path as necessary
+import { AutoIncrement } from "../utils";
 
 interface IUser extends Document {
     id?: number;
@@ -41,15 +40,7 @@ userSchema.pre("save", async function (next) {
 
     const user = this as HydratedDocument<IUser>;
 
-    // if (user.isNew && typeof user.id === 'undefined') {
-    //     const autoIncrement = await AutoIncrement.findOneAndUpdate(
-    //         { _id: "Users" },
-    //         { $inc: { seq: 1 } },
-    //         { new: true, upsert: true }
-    //     ).exec() as IAutoIncrement;
-
-    //     user.id = autoIncrement?.seq;
-    // }
+    await AutoIncrement.setAutoIncrementId(user, "Users");
 
     if (user.isModified('password')) {
         const salt = await bcrypt.genSalt(10);

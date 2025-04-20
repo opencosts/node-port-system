@@ -1,13 +1,17 @@
-import mongoose, { HydratedDocument, Schema } from "mongoose";
+import mongoose, { HydratedDocument, Schema, ObjectId } from "mongoose";
 import bcrypt from "bcryptjs";
 import { AutoIncrement } from "../utils";
 
-interface IUser extends Document {
+export interface IUser extends Document {
+    _id?: ObjectId;
     id?: number;
     name: string;
     email: string;
     password: string;
     status: "Enable" | "Disable";
+    createdAt?: Date;
+    updatedAt?: Date;
+    createdBy?: mongoose.Types.ObjectId;
 }
 
 
@@ -33,8 +37,10 @@ const userSchema = new Schema<IUser>({
         type: String,
         enum: ['Enable', 'Disable'],
         default: 'Enable'
-    }
-});
+    },
+    createdBy: { type: mongoose.Types.ObjectId, ref: 'User ', required: false },
+
+}, { timestamps: true });
 
 userSchema.pre("save", async function (next) {
 

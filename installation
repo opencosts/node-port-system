@@ -15,3 +15,13 @@ Created a new tsconfig.json with:
 
 
 You can learn more at https://aka.ms/tsconfig
+
+
+
+
+🔐 Generate RSA Key Pair for JWT (RS256) in git bash
+✅ Step 1: Generate a Private Key
+openssl genpkey -algorithm RSA -out private.key -pkeyopt rsa_keygen_bits:2048
+
+✅ Step 2: Generate the Public Key from the Private Key
+openssl rsa -in private.key -pubout -out public.key

@@ -1,2 +1,2 @@
 export * from './db';
-export * from './dotenv';
+export { default as config } from './dotenv';

@@ -9,6 +9,10 @@ class UserRepository {
         return await User.findById(id);
     }
 
+    findByEmail = async (email: string): Promise<IUser | null> => {
+        return await User.findOne({ email });
+    }
+
     create = async (userData: Partial<IUser>): Promise<IUser> => {
         const user = new User(userData);
         return await user.save();

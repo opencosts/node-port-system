@@ -7,7 +7,9 @@
     "esModuleInterop": true,
     "strict": true,
     "skipLibCheck": true,
-    "sourceMap": true
+    "sourceMap": true,
+    "typeRoots": ["node_modules/@types"],
+    "types": ["jsonwebtoken", "express"]  // Add express here
   },
   "include": ["src"],
   "exclude": ["node_modules", "dist"]

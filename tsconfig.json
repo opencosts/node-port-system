@@ -8,9 +8,10 @@
     "strict": true,
     "skipLibCheck": true,
     "sourceMap": true,
-    "typeRoots": ["node_modules/@types"],
+    "traceResolution": true,
+    "typeRoots": ["./node_modules/@types", "./src/types"],
     "types": ["jsonwebtoken", "express"]  // Add express here
   },
-  "include": ["src"],
+   "include": ["src/**/*"],
   "exclude": ["node_modules", "dist"]
 }

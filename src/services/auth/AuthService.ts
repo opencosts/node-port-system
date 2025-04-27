@@ -4,6 +4,7 @@ import jwt from 'jsonwebtoken'
 import { config } from '../../config';
 import { sanitizeUser } from '../../utils';
 import { User } from '../../models';
+import { privateKey } from '../../secrets';
 
 
 class AuthService {
@@ -26,8 +27,8 @@ class AuthService {
 
             const cleanUser = sanitizeUser(user);
 
-            const signOptions: object = { algorithm: 'HS256', expiresIn: '1h' };
-            const token = jwt.sign({ cleanUser }, config.jwtSecret, signOptions);
+            const signOptions: object = { algorithm: 'RS256', expiresIn: '1h' };
+            const token = jwt.sign({ ...cleanUser }, privateKey, signOptions);
             // const token = jwt.sign({ cleanUser }, config.jwtSecret, { algorithm: 'HS256', expiresIn: '1h' });
 
             return token;

@@ -2,7 +2,7 @@ import { User, IUser } from '../models';
 
 class UserRepository {
     async findAll(): Promise<IUser[]> {
-        return await User.find();
+        return await User.find({}, { "password": 0 });
     }
 
     findById = async (id: string): Promise<IUser | null> => {
